@@ -7,7 +7,7 @@ class Gem::Commands::VersionsCommand < Gem::Command
   end
 
   def description
-    'List all published versions of a gem'
+    'List all published versions of a gem.  Versions you have installed locally are asterisked.'
   end
 
   def arguments
@@ -20,14 +20,30 @@ class Gem::Commands::VersionsCommand < Gem::Command
 
   def execute
     name = get_one_gem_name
-    response = ::HTTParty.get "https://rubygems.org/api/v1/versions/#{name}.json"
+    locals = local_versions name
+
+    begin
+      response = ::HTTParty.get "https://rubygems.org/api/v1/versions/#{name}.json"
+    rescue  # Annoyingly Rubygems' API doesn't return JSON on a 404 response, tripping up HTTParty.
+      puts "Unable to find #{name}."
+      return
+    end
+
     if response.code == 200
-      puts response.map { |item| item['number'] }.join "\n"
+      remotes = response.map { |item| item['number'] }
+      remotes.each do |r|
+        puts "#{locals.include?(r) ? '*' : ' '} #{r}"
+      end
     else
       puts "Unable to find #{name}."
     end
-  rescue  # Annoyingly Rubygems' API doesn't return JSON on a 404 response, tripping up HTTParty.
-    puts "Unable to find #{name}."
+  end
+
+  def local_versions(name)
+    # From Rubygems' Gem::Commands::QueryCommand
+    dep = Gem::Dependency.new name, Gem::Requirement.default
+    specs = Gem.source_index.search dep
+    specs.map { |spec| spec.version.to_s }
   end
 
 end
