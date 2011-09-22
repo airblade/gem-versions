@@ -30,7 +30,7 @@ class Gem::Commands::VersionsCommand < Gem::Command
     end
 
     if response.code == 200
-      remotes = response.map { |item| item['number'] }
+      remotes = response.map { |item| item['number'] }.map { |v| Gem::Version.create v }.sort.reverse.map &:to_s
       remotes.each do |r|
         puts "#{locals.include?(r) ? '*' : ' '} #{r}"
       end
