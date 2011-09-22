@@ -24,7 +24,7 @@ class Gem::Commands::VersionsCommand < Gem::Command
 
     begin
       response = ::HTTParty.get "https://rubygems.org/api/v1/versions/#{name}.json"
-    rescue  # Rubygems' JSON response of plain text trips up HTTParty.
+    rescue MultiJson::DecodeError # Rubygems' invalid JSON response of plain text trips up HTTParty.
       puts "Unable to find #{name}."
       return
     end
