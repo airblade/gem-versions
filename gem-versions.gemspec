@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.version     = '0.0.1'
   s.authors     = [ 'Andy Stewart' ]
   s.email       = 'boss@airbladesoftware.com'
-  s.homepage    = ''
+  s.homepage    = 'https://github.com/airblade/gem-versions'
   s.summary     = 'List all published versions of a gem.'
   s.description = <<END
   The `gem versions` command can be used to show all versions of
