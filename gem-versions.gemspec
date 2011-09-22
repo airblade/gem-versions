@@ -3,7 +3,7 @@ $:.push File.expand_path('../lib', __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = 'gem-versions'
-  s.version     = '0.0.1'
+  s.version     = '0.0.2'
   s.authors     = [ 'Andy Stewart' ]
   s.email       = 'boss@airbladesoftware.com'
   s.homepage    = 'https://github.com/airblade/gem-versions'
