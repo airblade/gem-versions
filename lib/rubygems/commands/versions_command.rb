@@ -24,7 +24,7 @@ class Gem::Commands::VersionsCommand < Gem::Command
 
     begin
       response = ::HTTParty.get "https://rubygems.org/api/v1/versions/#{name}.json"
-    rescue  # Annoyingly Rubygems' API doesn't return JSON on a 404 response, tripping up HTTParty.
+    rescue  # Rubygems' JSON response of plain text trips up HTTParty.
       puts "Unable to find #{name}."
       return
     end
