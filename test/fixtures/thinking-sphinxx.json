@@ -1,0 +1,12 @@
+HTTP/1.1 404 Not Found
+Date: Thu, 22 Sep 2011 14:50:49 GMT
+Server: Apache/2.2.3 (Red Hat) mod_ssl/2.2.3 OpenSSL/0.9.8e-fips-rhel5 Phusion_Passenger/3.0.0
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.0
+X-UA-Compatible: IE=Edge,chrome=1
+X-Runtime: 0.004267
+Cache-Control: no-cache
+Status: 404
+Transfer-Encoding: chunked
+Content-Type: application/json; charset=utf-8
+
+This rubygem could not be found.

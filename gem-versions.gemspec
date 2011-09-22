@@ -16,6 +16,10 @@ END
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.require_path  = 'lib'
 
-  s.add_dependency 'httparty', '~> 0.8'
+  s.add_dependency             'httparty', '~> 0.8'
+  s.add_development_dependency 'rake',     '0.8.7'
+  s.add_development_dependency 'fakeweb',  '~> 1.3'
+  s.add_development_dependency 'flexmock', '~> 0.9'
 end
