@@ -40,9 +40,12 @@ class Gem::Commands::VersionsCommand < Gem::Command
   end
 
   def local_versions(name)
-    # From Rubygems' Gem::Commands::QueryCommand
-    dep = Gem::Dependency.new name, Gem::Requirement.default
-    specs = Gem.source_index.search dep
+    specs = if Gem::Specification.respond_to? :find_all_by_name
+      Gem::Specification.find_all_by_name name
+    else
+      dep = Gem::Dependency.new name, Gem::Requirement.default
+      Gem.source_index.search dep
+    end
     specs.map { |spec| spec.version.to_s }
   end
 
